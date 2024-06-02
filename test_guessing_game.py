@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from my_module import guess_number  # Adjust the import as needed
+from guessing_game import guess_number  # Adjust the imporcd destopt as needed
 
 
 class GuessNumberTest(unittest.TestCase):
