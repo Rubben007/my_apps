@@ -1,34 +1,45 @@
 import random
 
-print("wellcome to the guessing game")
-print("I have a number betwwen 1 and 10 can you nguess?")
-print("[choice: press 1 to try, press 2 to close the game]")
 
-def Guess():
-    rang1 = 1
-    rang2 = 20
+def guess_number(secret_number, guesses):
     guess_count = 0
     guess_limit = 3
-    secret_number = random.randint(rang1, rang2)
-    while guess_count < guess_limit:
+    results = []
+
+    for guess in guesses:
         guess_count += 1
-        guess = int(input("enter a guess: "))
         if guess == secret_number:
-            print("congratulation you won")
+            results.append("congratulation you won")
             break
         elif guess > secret_number:
-            print("value too high try again")
+            results.append("value too high try again")
         elif guess < secret_number:
-            print("value too low try again")
-    else:
-        print("oh sorry you failed all try attempt")
+            results.append("value too low try again")
+
+    if guess_count >= guess_limit and guesses[-1] != secret_number:
+        results.append("oh sorry you failed all try attempt")
+
+    return results
 
 
-choice = input("enter choice: ")
-if choice == "2":
-    print("Game closed")
-elif choice == "1":
-    return Guess()
+def main():
+    print("welcome to the guessing game")
+    print("I have a number between 1 and 20, can you guess?")
+    print("[choice: press 1 to try, press 2 to close the game]")
+
+    choice = input("enter choice: ")
+    if choice == "2":
+        print("Game closed")
+    elif choice == "1":
+        secret_number = random.randint(1, 20)
+        guesses = []
+        for _ in range(3):
+            guess = int(input("enter a guess: "))
+            guesses.append(guess)
+        results = guess_number(secret_number, guesses)
+        for result in results:
+            print(result)
 
 
-Guessing_game()
+if __name__ == "__main__":
+    main()
